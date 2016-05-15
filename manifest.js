@@ -13,7 +13,9 @@ module.exports = {
         
     },
     "registrations": [
-
+        {
+            "plugin": './config'   
+        }
     ]
 };
 
