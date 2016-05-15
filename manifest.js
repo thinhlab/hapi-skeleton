@@ -14,7 +14,10 @@ module.exports = {
     },
     "registrations": [
         {
-            "plugin": './config'   
+            "plugin": './config'
+        },
+        {
+            "plugin": './utils/Response'
         }
     ]
 };
