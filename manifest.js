@@ -17,7 +17,7 @@ module.exports = {
             "plugin": './config'
         },
         {
-            "plugin": './utils/Response'
+            "plugin": './utils/customize-boom-response'
         }
     ]
 };
