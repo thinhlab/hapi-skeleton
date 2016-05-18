@@ -29,7 +29,7 @@ exports.register = (server, opts, next) => {
         if (response.isBoom ) {
             var new_response = new Response();
             new_response.status_code = response.output.payload.statusCode || 500;
-            new_response.error_message = response.output.payload.error;
+            new_response.error_message = response.output.payload.message || response.output.payload.error ;
             new_response.error = response.output.payload.error.length > 0 ? true : false;
             response.output.payload = new_response;
         }

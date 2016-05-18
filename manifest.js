@@ -10,7 +10,7 @@ module.exports = {
         }
     ],
     "server": {
-        
+
     },
     "registrations": [
         {
@@ -18,6 +18,9 @@ module.exports = {
         },
         {
             "plugin": './utils/customize-boom-response'
+        },
+        {
+            "plugin": './modules/test-api'
         }
     ]
 };
