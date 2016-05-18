@@ -14,7 +14,12 @@ module.exports = {
     },
     "registrations": [
         {
-            "plugin": './config'
+            "plugin": {
+                'register': './config',
+                "options": {
+                    "model_dir": ['web']
+                }
+            }
         },
         {
             "plugin": './utils/customize-boom-response'

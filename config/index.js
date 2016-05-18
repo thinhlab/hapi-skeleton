@@ -33,7 +33,9 @@ ConfigLoader.prototype.setConfig =  function (config_obj, prefix,  is_global ) {
 }
 
 
+
 exports.register = (server, opts, next) =>{
+    console.log(opts);
     var Loader = new ConfigLoader(server, opts);
     Loader
         .setConfig(require('./globals'), 'global', true)
