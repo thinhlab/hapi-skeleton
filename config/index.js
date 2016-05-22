@@ -1,4 +1,7 @@
 "use strict";
+var path = require('path');
+var fs   = require('fs');
+
 class ConfigLoader {
     constructor(server, opts){
         this.server = server;
@@ -27,6 +30,25 @@ ConfigLoader.prototype.setConfig =  function (config_obj, prefix,  is_global ) {
                 this.server.app.config[prefix] = {};
             }
             this.server.app.config[prefix][config_key] = config_value;
+             
+            // Require database schema 
+            
+            if(prefix == 'databases' && this.opts && this.opts.models_dir ){
+                var _list_file = [];
+                try{
+                    // fetch all file in dir 
+                    _list_file = fs.readdirSync(path.join(this.opts.models_dir, config_key));
+                    
+                } catch(error){
+                    throw new Error(error.message);
+                }
+                
+                _list_file.map(function (value){
+                    var file_name = value.split('.').length > 0 ? value.split('.')[0] : "";
+                    // Require module and set global variables;
+                    global[file_name] = require(path.join('../',this.opts.models_dir, config_key, value))(config_value);
+                });
+            }
         }
     }
     return this;
@@ -35,11 +57,11 @@ ConfigLoader.prototype.setConfig =  function (config_obj, prefix,  is_global ) {
 
 
 exports.register = (server, opts, next) =>{
-    console.log(opts);
     var Loader = new ConfigLoader(server, opts);
     Loader
         .setConfig(require('./globals'), 'global', true)
-        .setConfig(require('./app'), 'app', false);
+        .setConfig(require('./app'), 'app', false)
+        .setConfig(require('./databases'), 'databases', false);
     
     return next();
 }

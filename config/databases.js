@@ -1,14 +1,34 @@
+var Sequelize = require('sequelize');
+
+var host     = "localhost";
+var user     = "root";
+var password = "thinhaA@2";
+
 module.exports = {
-    'orders': {
-        "host": "127.0.0.1",
-        "user": "root",
-        "password": "",
-        "database": "bxm_orders"
-    },
-    'metadata': {
-        "host": "127.0.0.1",
-        "user": "root",
-        "password": "",
-        "database": "bxm_metadata"
-    }
+    
+    'bxm_metadata': new Sequelize('bxm_metadata', user, password, {
+        host: host,
+        dialect: "mysql",
+        pool: {
+            max: 5,
+            min: 0,
+            idle: 10000
+        },
+        define: {
+            timestamps: false // true by default
+        }
+    }),
+    
+    'bxm_orders': new Sequelize('bxm_orders', user, password, {
+        host: host,
+        dialect: "mysql",
+        pool: {
+            max: 5,
+            min: 0,
+            idle: 10000
+        },
+        define: {
+            timestamps: false // true by default
+        }
+    })
 }

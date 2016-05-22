@@ -17,7 +17,7 @@ module.exports = {
             "plugin": {
                 'register': './config',
                 "options": {
-                    "model_dir": ['web']
+                    "models_dir": './models'
                 }
             }
         },

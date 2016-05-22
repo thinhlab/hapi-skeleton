@@ -3,7 +3,6 @@ var knex        = require('knex');
 var bookshelf   = require('bookshelf');
 
 exports.register = function (server, opts, next){
-    
     server.route({
        method: "GET",
        path: '/',
